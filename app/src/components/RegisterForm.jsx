@@ -32,9 +32,9 @@ const RegisterForm = () => {
 		});
 	}
 
-	console.log(user);
+	// console.log(user);
 	return (
-		<form className="w-full h-full py-2 flex flex-col justify-end items-center gap-2 transition-opacity">
+		<form className="w-full h-full py-2 flex flex-col justify-center items-center gap-2 transition-opacity">
 			<h1 className="text-3xl font-bold text-green-700">Register</h1>
 			<CustomInput
 				id="fullName-form"
@@ -79,15 +79,15 @@ const RegisterForm = () => {
 				></textarea>
 			</label>
 			<div className="mt-5 w-full">
-				<SubmitButton text="Daftar" onClick={handleOnRegister} />
+				<SubmitButton text="REGISTER" onClick={handleOnRegister} />
 			</div>
 			<label className="text-sm my-4">
-				Anda punya akun?{' '}
+				You have account?{' '}
 				<Link
 					to={'/login'}
 					className=" text-green-primary font-bold hover:underline cursor-pointer"
 				>
-					Masuk Sekarang
+					Login Now
 				</Link>
 			</label>
 		</form>
