@@ -23,7 +23,7 @@ const errorHandler = (err, req, res, next) => {
 
 		case 'NotFound':
 			status = 404;
-			message = 'Not Found';
+			message = err.message ?? 'Not Found';
 			break;
 
 		case 'SequelizeUniqueConstraintError':

@@ -25,6 +25,7 @@ module.exports = {
 			},
 			paymentStatus: {
 				type: Sequelize.STRING(20),
+				defaultValue: 'unpaid',
 			},
 			transactionToken: {
 				type: Sequelize.STRING,
