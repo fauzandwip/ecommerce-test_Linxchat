@@ -21,6 +21,11 @@ const errorHandler = (err, req, res, next) => {
 			message = 'Invalid token';
 			break;
 
+		case 'Forbidden':
+			status = 403;
+			message = err.message ?? 'Unauthorized';
+			break;
+
 		case 'NotFound':
 			status = 404;
 			message = err.message ?? 'Not Found';

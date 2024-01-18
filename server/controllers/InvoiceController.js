@@ -42,9 +42,28 @@ class InvoiceController {
 			);
 
 			await t.commit();
-			res.status(201).send('create invoice');
+			res.status(201).send({ message: 'Success create invoice' });
 		} catch (error) {
 			await t.rollback();
+			next(error);
+		}
+	}
+
+	static async getInvoiceById(req, res, next) {
+		try {
+			const { id } = req.params;
+
+			const invoice = await Invoice.findByPk(id, {
+				include: {
+					model: OrderItem,
+					include: {
+						model: Product,
+					},
+				},
+			});
+
+			res.status(200).send(invoice);
+		} catch (error) {
 			next(error);
 		}
 	}
