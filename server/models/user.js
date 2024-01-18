@@ -9,13 +9,41 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
+			User.hasOne(models.Profile);
 		}
 	}
 	User.init(
 		{
-			email: DataTypes.STRING(50),
-			password: DataTypes.STRING(15),
-			fullname: DataTypes.STRING,
+			email: {
+				type: DataTypes.STRING(50),
+				unique: { msg: 'Email already exists' },
+				allowNull: false,
+				isEmail: true,
+				validate: {
+					notNull: { msg: 'Email is required' },
+					notEmpty: { msg: 'Email is required' },
+				},
+			},
+			password: {
+				type: DataTypes.STRING(15),
+				allowNull: false,
+				validate: {
+					len: {
+						args: [5, 15],
+						msg: 'Password must be between 5 and 15 characters',
+					},
+					notNull: { msg: 'Password is required' },
+					notEmpty: { msg: 'Password is required' },
+				},
+			},
+			fullname: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				validate: {
+					notNull: { msg: 'Fullname is required' },
+					notEmpty: { msg: 'Fullname is required' },
+				},
+			},
 		},
 		{
 			sequelize,
