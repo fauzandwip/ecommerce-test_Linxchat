@@ -22,10 +22,10 @@ module.exports = {
 				type: Sequelize.INTEGER,
 			},
 			brand: {
-				type: Sequelize.STRING(20),
+				type: Sequelize.STRING(50),
 			},
 			category: {
-				type: Sequelize.STRING(20),
+				type: Sequelize.STRING(50),
 			},
 			thumbnail: {
 				type: Sequelize.STRING,
