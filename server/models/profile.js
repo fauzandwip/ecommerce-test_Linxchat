@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Profile.init(
 		{
+			UserId: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
 			phoneNumber: {
 				type: DataTypes.STRING(20),
 				allowNull: false,
@@ -23,10 +27,6 @@ module.exports = (sequelize, DataTypes) => {
 					notNull: { msg: 'Address is required' },
 					notEmpty: { msg: 'Address is required' },
 				},
-			},
-			UserId: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
 			},
 		},
 		{

@@ -1,4 +1,5 @@
 const InvoiceController = require('../controllers/InvoiceController');
+const PaymentController = require('../controllers/PaymentController');
 const ProductController = require('../controllers/ProductController');
 const UserController = require('../controllers/UserController');
 const authentication = require('../middlewares/authentication');
@@ -18,5 +19,6 @@ router.get(
 	InvoiceController.getInvoiceById
 );
 router.post('/invoice', InvoiceController.createInvoice);
+router.get('/midtrans/token/:invoiceId', PaymentController.getMidtransToken);
 
 module.exports = router;
