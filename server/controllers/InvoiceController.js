@@ -1,4 +1,11 @@
-const { sequelize, Product, Invoice, OrderItem } = require('../models');
+const {
+	sequelize,
+	Product,
+	Invoice,
+	OrderItem,
+	User,
+	Profile,
+} = require('../models');
 
 class InvoiceController {
 	static async createInvoice(req, res, next) {
@@ -42,7 +49,7 @@ class InvoiceController {
 			);
 
 			await t.commit();
-			res.status(201).send({ message: 'Success create invoice' });
+			res.status(201).send({ invoiceId: newInvoice.id });
 		} catch (error) {
 			await t.rollback();
 			next(error);
@@ -54,12 +61,21 @@ class InvoiceController {
 			const { id } = req.params;
 
 			const invoice = await Invoice.findByPk(id, {
-				include: {
-					model: OrderItem,
-					include: {
-						model: Product,
+				include: [
+					{
+						model: OrderItem,
+						include: {
+							model: Product,
+						},
 					},
-				},
+					{
+						model: User,
+						attributes: { exclude: ['password'] },
+						include: {
+							model: Profile,
+						},
+					},
+				],
 			});
 
 			res.status(200).send(invoice);
