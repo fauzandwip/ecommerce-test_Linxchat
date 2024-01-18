@@ -4,6 +4,7 @@ import SubmitButton from './SubmitButton';
 import { useNavigate } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
+import api from '../api';
 
 const LoginForm = () => {
 	const navigate = useNavigate();
@@ -12,9 +13,13 @@ const LoginForm = () => {
 		password: '',
 	});
 
-	const handleOnLogin = async () => {
+	const handleOnLogin = async (e) => {
+		e.preventDefault();
 		try {
-			navigate('/register');
+			const { data } = await api.post('/login', user);
+			// console.log(data, 'login from server');
+			localStorage.setItem('access_token', data.access_token);
+			navigate('/');
 		} catch (error) {
 			console.log(error);
 		}
